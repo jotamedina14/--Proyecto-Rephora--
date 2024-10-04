@@ -5,11 +5,11 @@ import { useQuasar } from 'quasar';
 import CardComponent from '../components/cards/cardsMenu.vue';
 
 import logImage from '../assets/img/usuarios.png';
-import apprenticeImage from '../../src/assets/img/aprendices.png';
+import apprenticeImage from '../assets/img/aprendices.png';
 import binnacleImage from '../assets/img/bitacoras.png';
-import modalityImage from '../assets/img/fichasimage.png';
-import followupImage from '../assets/img/seguimientosimage.png';
-import assignmentImage from '../assets/img/modalidadimage.png';
+import modalityImage from '../assets/img/fichasImage.png';
+import followupImage from '../assets/img/seguimientosImage.png';
+import assignmentImage from '../assets/img/modalidadImage.png';
 
 </script>
 
