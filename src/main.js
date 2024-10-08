@@ -3,6 +3,7 @@ import { createPinia } from "pinia"
 import { router } from './routes/routes.js'
 import { Quasar, Notify, QSelect, QInput, QIcon, QItem, QItemSection, QCard, QCardSection, QCardActions, QBtn, QDialog } from 'quasar'
 import axios from 'axios'
+import  PiniaVuePluginPersistedstate from 'pinia-plugin-persistedstate'
 
 // https://asistencia-50zn.onrender.com/api
 // http://localhost:5000/api
@@ -14,6 +15,9 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:5000/api'
 
 const pinia = createPinia()
+
+
+pinia.use(PiniaVuePluginPersistedstate)
 
 import './style.css'
 import App from './App.vue'

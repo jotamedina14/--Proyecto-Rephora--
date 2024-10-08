@@ -43,7 +43,7 @@ const props = defineProps({
 
 
 .buttons-background {
-    background-color: #ddfadbd0;
+    background-color: #ffffffd0;
 }
 
 
@@ -74,7 +74,7 @@ const props = defineProps({
 
 
 .section {
-    background-color: #ddfadbd0;
+    background-color: #ffffffd0;
     text-align: center;
 }
 .buttons {
