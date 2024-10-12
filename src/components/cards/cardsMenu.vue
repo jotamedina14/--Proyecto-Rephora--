@@ -15,7 +15,6 @@
 </template>
 
 <script setup>
-
 const props = defineProps({
     titles: {
         type: String,
@@ -33,29 +32,23 @@ const props = defineProps({
 </script>
 
 <style scoped>
-
-
-
 .cards:hover {
     transform: scale(1.02);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
-
 .buttons-background {
     background-color: #ffffffd0;
 }
 
-
-
-
 .buttons:hover {
     background-color: #38803a;
 }
+
 .cards {
     display: flex;
     flex-direction: column;
-    border: none;
+    border: 1px solid #38803a; /* Cambiar borde a color verde */
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     border-radius: 10px;
@@ -72,11 +65,11 @@ const props = defineProps({
     background-color: transparent;
 }
 
-
 .section {
     background-color: #ffffffd0;
     text-align: center;
 }
+
 .buttons {
     background-color: #2E7D32;
     font-size: 15px;
