@@ -1,28 +1,44 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import logosena from '../assets/img/logosena.png';
 
+// Variables para los campos
 const email = ref('');
 const password = ref('');
 const role = ref('');
 const emailError = ref('');
 const passwordError = ref('');
 const passwordVisible = ref(false);
+const documento = ref('');
 
+// Función de login
 const login = () => {
-  if (role.value === 'administrador') {
-    // Lógica para administrador
+  if (role.value === 'administrador' || role.value === 'instructor') {
+    // Lógica para administrador e instructor
   } else if (role.value === 'consultor') {
     // Lógica para consultor
-  } else if (role.value === 'instructor') {
-    // Lógica para instructor
   } else {
     // Manejar error de rol no seleccionado
   }
 };
 
+// Función para olvidarse de la contraseña
 const forgotPassword = () => {
   // Lógica para olvidar contraseña
+};
+
+// Computed para verificar el rol seleccionado
+const showEmailPassword = computed(() => {
+  return role.value === 'administrador' || role.value === 'instructor';
+});
+
+const showDocumentoEmail = computed(() => {
+  return role.value === 'consultor';
+});
+
+// Manejar cambio de rol
+const handleRoleChange = (event) => {
+  role.value = event.target.value.toLowerCase();
 };
 </script>
 
@@ -38,20 +54,21 @@ const forgotPassword = () => {
               <q-typography tag="h2" class="q-mt-md login-title">Login</q-typography>
             </q-card-section>
 
-            <!-- Reorganizamos los campos, Rol va de primero -->
+            <!-- Selección de Rol -->
             <q-card-section>
-              <q-select
-                dense
-                label-color="green-7"
-                color="green-4"
-                outlined
-                class="input"
-                v-model="role"
-                :options="['administrador', 'consultor', 'instructor']"
-                label="Rol">
-              </q-select>
+              <div class="form-group">
+                <label for="rol" class="form-label"></label>
+                <select id="rol" v-model="role" @change="handleRoleChange" class="input-field">
+                  <option value="">Seleccione un rol</option>
+                  <option value="administrador">Administrador</option>
+                  <option value="consultor">Consultor</option>
+                  <option value="instructor">Instructor</option>
+                </select>
+              </div>
 
+              <!-- Mostrar Email y Contraseña solo si es administrador o instructor -->
               <q-input 
+                v-if="showEmailPassword"
                 dense 
                 label-color="green-7" 
                 color="#38803a" 
@@ -64,6 +81,7 @@ const forgotPassword = () => {
               </q-input>
 
               <q-input 
+                v-if="showEmailPassword"
                 dense 
                 label-color="green-7" 
                 color="#38803a" 
@@ -79,6 +97,31 @@ const forgotPassword = () => {
                           class="cursor-pointer" 
                           @click="passwordVisible = !passwordVisible"/>
                 </template>
+              </q-input>
+
+              <!-- Mostrar Documento y Email solo si es consultor -->
+              <q-input 
+                v-if="showDocumentoEmail"
+                dense 
+                label-color="green-7" 
+                color="#38803a" 
+                outlined 
+                class="q-mt-md input" 
+                v-model="documento"
+                label="Documento">
+              </q-input>
+
+              <q-input 
+                v-if="showDocumentoEmail"
+                dense 
+                label-color="green-7" 
+                color="#38803a" 
+                outlined 
+                class="q-mt-xs input" 
+                v-model="email"
+                :error="!!emailError" 
+                :error-message="emailError" 
+                label="Email">
               </q-input>
             </q-card-section>
 
@@ -139,6 +182,7 @@ const forgotPassword = () => {
   background-color: white;
   transition: all 0.4s ease;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  border: 1px solid #38803a; /* Añadir borde verde */
 }
 
 .my_card:hover {
@@ -194,5 +238,27 @@ const forgotPassword = () => {
   background: linear-gradient(45deg, #38803a, #38803a);
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(67, 160, 71, 0.4);
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.input-field {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.input-field:focus {
+  border-color: #38803a; /* Cambiar borde a color verde */
 }
 </style>
